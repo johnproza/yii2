@@ -2,14 +2,18 @@
     "name": "johnproza/yii2-menu",
     "description": "Dynamic menu",
     "type": "yii2-extension",
-    "keywords": ["yii2","extension"],
+    "keywords": ["yii2","extension","menu"],
     "license": "GPL-3.0+",
+    "version": "1.0.0",
     "authors": [
         {
             "name": "Ivan Prozorskov",
-            "email": "ivan.proza@gmail.com"
+            "email": "ivan.proza@gmail.com",
+            "homepage": "https://github.com/johnproza/yii2-menu",
+            "role": "developer"
         }
     ],
+    "minimum-stability": "dev",
     "require": {
         "yiisoft/yii2": "~2.0.0"
     },

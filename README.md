@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 Dynamic menu
 ============
 Dynamic menu
@@ -23,14 +22,12 @@ or add
 to the require section of your `composer.json` file.
 
 
-Usage
+Config extantion
 -----
 
-Once the extension is installed, simply use it in your code by  :
+Use it in your code by config file :
 
 ```php
-<?= \oboom\menu\AutoloadExample::widget(); ?>```
-=======
-# yii2
-extantions for yii2 framework
->>>>>>> 89324c2f4b07656be7536c51ea0a69b934e875c3
+'menu' => [
+            'class' => 'oboom\menu\Module',
+        ]
