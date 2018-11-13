@@ -22,10 +22,10 @@ or add
 to the require section of your `composer.json` file.
 
 
-Config extantion
+Config extension
 -----
 
-Use it in your code by config file :
+Use it in your code:
 
 ```php
 'menu' => [

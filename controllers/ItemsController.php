@@ -14,7 +14,7 @@ use oboom\menu\models\Menu;
 use oboom\menu\models\MenuItems;
 use yii\data\ArrayDataProvider;
 
-class DefaultController extends Controller
+class ItemsController extends Controller
 {
     public function actionIndex()
     {
@@ -33,25 +33,6 @@ class DefaultController extends Controller
         $items = $provider->getModels();
 
         return $this->render('index',['items'=>$items]);
-    }
-
-    public function actionList()
-    {
-        $query = Menu::find()->all();
-        $provider = new ArrayDataProvider([
-
-            'allModels'=>$query,
-            'pagination' => [
-                'pageSize' => 20,
-            ],
-            'sort' => [
-                'attributes' => ['id'],
-            ],
-        ]);
-
-        $items = $provider->getModels();
-
-        return $this->render('list',['items'=>$items]);
     }
 }
 
