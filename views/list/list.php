@@ -3,4 +3,4 @@
 $this->title = "Доступные группы меню"
 ?>
 
-<div><?php print_r($items);?></div>
+<div id="app" class="mainSection"></div>

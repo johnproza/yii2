@@ -16,6 +16,8 @@ class m181113_120305_menu_items extends Migration
             CREATE TABLE IF NOT EXISTS `menu_items` (
               `id` INT NOT NULL AUTO_INCREMENT,
               `label` VARCHAR(45) NOT NULL,
+              `title` VARCHAR(180) NULL,
+              `content` TEXT NULL,
               `status` SMALLINT(6) NOT NULL,
               `parent` INT NOT NULL DEFAULT 0,
               `seo_id` INT NULL,

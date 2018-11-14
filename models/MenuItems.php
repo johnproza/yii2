@@ -34,9 +34,10 @@ class MenuItems extends ActiveRecord
     public function rules()
     {
         return [
-            [['label', 'status'], 'required'],
+            [['label', 'status','title'], 'required'],
             [['status', 'parent', 'seo_id', 'menu_id'], 'integer'],
             [['label'], 'string', 'max' => 45],
+            [['title','content'], 'string', 'max' => 45],
             [['menu_id'], 'exist', 'skipOnError' => true, 'targetClass' => Menu::className(), 'targetAttribute' => ['menu_id' => 'id']],
             [['seo_id'], 'exist', 'skipOnError' => true, 'targetClass' => Seo::className(), 'targetAttribute' => ['seo_id' => 'id']],
         ];
@@ -50,6 +51,8 @@ class MenuItems extends ActiveRecord
         return [
             'id' => 'ID',
             'label' => 'Название',
+            'title' => 'Заголовок',
+            'content' => 'Описание',
             'status' => 'Статус',
             'parent' => 'Родитель',
             'seo_id' => 'Seo ID',

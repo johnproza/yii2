@@ -1,5 +1,4 @@
 <?php
-
 $this->title = "Пункты меню"
 ?>
-<div>aasdasd</div>
+<div id="app" class="mainSection"></div>
