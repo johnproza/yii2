@@ -11,8 +11,12 @@ use yii\web\AssetBundle;
 
 class AssetsBundle extends AssetBundle
 {
-    public $sourcePath = '@vendor/oboom/yii2-menu/assets';
+    public $sourcePath = '@vendor/johnproza/yii2-menu/assets';
     public $css = [
         'css/style.css'
+    ];
+
+    public $publishOptions = [
+        'forceCopy' => true,
     ];
 }

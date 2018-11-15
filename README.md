@@ -1,4 +1,4 @@
-Dynamic menu
+Dynamic menu + content
 ============
 Dynamic menu
 

@@ -35,6 +35,10 @@ class ItemsController extends Controller
         return $this->render('index',['items'=>$items]);
     }
 
+    public static function Menu($id){
+        return MenuItems::find()->joinWith('seo')->joinWith('menu')->where(['menu_items.status'=>1,'menu.id'=>$id , 'menu.status'=>1])->asArray()->all();
+    }
+
     public function actionList()
     {
         if(Yii::$app->request->isAjax) {
