@@ -9,11 +9,16 @@
 namespace oboom\menu;
 use yii\web\AssetBundle;
 
-class AssetsBundle extends AssetBundle
+class FrontAssetsBundle extends AssetBundle
 {
     public $sourcePath = '@vendor/johnproza/yii2-menu/assets';
     public $css = [
-        'css/style.css'
+        'css/style.css',
+    ];
+    public $js = [
+    ];
+
+    public $depends = [
     ];
 
     public $publishOptions = [

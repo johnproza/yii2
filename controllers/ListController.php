@@ -18,7 +18,7 @@ class ListController extends Controller
 {
     public function actionIndex()
     {
-        $query = Menu::find()->all();
+        $query = Menu::find()->asArray()->all();
         $provider = new ArrayDataProvider([
 
             'allModels'=>$query,
@@ -30,9 +30,10 @@ class ListController extends Controller
             ],
         ]);
 
-        $items = $provider->getModels();
 
-        return $this->render('list',['items'=>$items]);
+        return $this->render('list',[
+            'items'=>$provider->getModels(),
+            'pages'=>$provider->pagination]);
     }
 
     public function actionList()
@@ -99,8 +100,9 @@ class ListController extends Controller
     {
 
 
-        if(Yii::$app->request->isAjax){
-            $cat = Menu::findOne(Yii::$app->request->post(id));
+        if(Yii::$app->request->isPost){
+            var_dump(Yii::$app->request->post());
+            $cat = Menu::findOne();
             if ($cat->status == 0) {
                 $cat->status =1;
             }

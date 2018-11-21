@@ -7,16 +7,23 @@
  */
 
 use yii\helpers\Url;
-use oboom\menu\AssetsBundle;
+use oboom\menu\FrontAssetsBundle;
 
-AssetsBundle::register($this);
+FrontAssetsBundle::register($this);
 ?>
 <?if (!empty($data)):?>
 <nav class="nav <?=$type;?><?=$className;?>">
     <ul>
     <?foreach ($data as $item):?>
        <li>
-           <a href="<?=Url::toRoute([$item['seo']['url']]);?>"><?=$item['label'];?></a>
+           <a href="<?
+                    if(!empty($item['redirect']) && !is_null($item['redirect'])) {
+                        echo Url::toRoute([$item['redirect']]);
+                    }
+                    else {
+                        echo Url::toRoute([$item['seo']['url']]);
+                    }
+                      ;?>"><?=$item['label'];?></a>
        </li>
     <?endforeach;?>
     </ul>

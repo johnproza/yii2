@@ -19,6 +19,7 @@ class m181113_120305_menu_items extends Migration
               `title` VARCHAR(180) NULL,
               `content` TEXT NULL,
               `status` SMALLINT(6) NOT NULL,
+              `redirect` VARCHAR(100) NULL,
               `parent` INT NOT NULL DEFAULT 0,
               `seo_id` INT NULL,
               `menu_id` INT NULL,

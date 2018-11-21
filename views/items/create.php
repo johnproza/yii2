@@ -8,8 +8,13 @@
 use yii\bootstrap\ActiveForm;
 use yii\bootstrap\Tabs;
 use yii\helpers\Html;
+use yii\helpers\Url;
+
 
 $this->title = 'Login';
+use oboom\menu\BackAssetsBundle;
+BackAssetsBundle::register($this);
+//$this->registerJsFile('@oboom/menu/assets/js/froala_editor.min.js', ['position' => \yii\web\View::POS_END]);
 ?>
 <div class="mainSection category">
     <?php $form = ActiveForm::begin(['id' => 'create-category',
@@ -32,7 +37,7 @@ $this->title = 'Login';
     ]); ?>
     <div class="form-group">
         <?= Html::submitButton('Сохранить', ['class' => 'btn btn-primary', 'name' => 'login-button']) ?>
-        <?= Html::a('Отмена', ['/menu/items/'], ['class'=>'btn btn-danger']) ?>
+        <?= Html::a('Отмена', Yii::$app->request->referrer, ['class'=>'btn btn-danger']) ?>
     </div>
     <?php ActiveForm::end(); ?>
 </div>

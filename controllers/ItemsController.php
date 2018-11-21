@@ -18,7 +18,7 @@ class ItemsController extends Controller
 {
     public function actionIndex()
     {
-        $query = MenuItems::find()->all();
+        $query = MenuItems::find()->joinWith('menu')->asArray()->all();
         $provider = new ArrayDataProvider([
 
             'allModels'=>$query,
@@ -30,43 +30,17 @@ class ItemsController extends Controller
             ],
         ]);
 
-        $items = $provider->getModels();
 
-        return $this->render('index',['items'=>$items]);
+        return $this->render('index',[
+            'items'=>$provider->getModels(),
+            'pages'=>$provider->pagination]);
     }
 
     public static function Menu($id){
         return MenuItems::find()->joinWith('seo')->joinWith('menu')->where(['menu_items.status'=>1,'menu.id'=>$id , 'menu.status'=>1])->asArray()->all();
     }
 
-    public function actionList()
-    {
-        if(Yii::$app->request->isAjax) {
-            $query = MenuItems::find()->joinWith('menu')->asArray()->all();
-            $provider = new ArrayDataProvider([
 
-                'allModels' => $query,
-                'pagination' => [
-                    'pageSize' => 20,
-                ],
-                'sort' => [
-                    'attributes' => ['id'],
-                ],
-            ]);
-
-            $items = $provider->getModels();
-
-            return $this->asJson([
-                'items'=>$items,
-                'total' =>$provider->pagination->pageCount,
-                'status' => true,
-            ]);
-
-        }
-        else {
-            return $this->asJson(['status'=>'Access denied']);
-        }
-    }
 
     public function actionCreate()
     {
@@ -166,6 +140,10 @@ class ItemsController extends Controller
         else {
             return $this->asJson(['status'=>'Access denied']);
         }
+    }
+
+    protected function getByUrl($url){
+        return Seo::find()->where(['seo.url'=>$url, 'menu_items.status'=>1])->joinWith('items')->asArray()->limit(1)->one();
     }
 }
 

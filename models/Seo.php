@@ -57,7 +57,7 @@ class Seo extends \yii\db\ActiveRecord
      */
     public function getItems()
     {
-        return $this->hasMany(MenuItems::className(), ['seo_id' => 'id']);
+        return $this->hasOne(MenuItems::className(), ['seo_id' => 'id']);
     }
 
 }

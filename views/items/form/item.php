@@ -34,6 +34,9 @@ use yii\helpers\ArrayHelper;
     <div class="col-lg-12 col-md-12">
         <?= $form->field($item, 'content')->textArea(['placeholder'=>'Описание'])->label(false) ?>
     </div>
+    <div class="col-lg-12 col-md-12">
+        <?= $form->field($item, 'redirect')->textInput(['placeholder'=>'Редирект url'])->label(false) ?>
+    </div>
     <div class="col-lg-6 col-md-6">
         <?= $form->field($item, 'parent')->dropDownList($arrayParent,
             ['prompt' => ' -- Выберите родителя --'])->label(false) ?>

@@ -8,6 +8,7 @@
 use yii\bootstrap\ActiveForm;
 use yii\bootstrap\Tabs;
 use yii\helpers\Html;
+use yii\helpers\Url;
 
 $this->title = 'Login';
 ?>
@@ -27,7 +28,7 @@ $this->title = 'Login';
     ]); ?>
     <div class="form-group">
         <?= Html::submitButton('Сохранить', ['class' => 'btn btn-primary', 'name' => 'login-button']) ?>
-        <?= Html::a('Отмена', ['/menu/list/'], ['class'=>'btn btn-danger']) ?>
+        <?= Html::a('Отмена', Yii::$app->request->referrer, ['class'=>'btn btn-danger']) ?>
     </div>
     <?php ActiveForm::end(); ?>
 </div>
