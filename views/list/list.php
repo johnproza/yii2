@@ -4,6 +4,7 @@ use yii\widgets\Pjax;
 use yii\helpers\Html;
 use yii\helpers\Url;
 
+
 $this->title = "Группы меню";
 ?>
 <div id="app" class="mainSection list">
@@ -13,7 +14,7 @@ $this->title = "Группы меню";
 
     <div class="col-md-12">
         <div class="systemBar">
-            <?= Html::a("Создать запись", [Url::to().'/create/'], ['class' => 'btn btn-success']) ?>
+            <?= Html::a("Создать запись", [Url::to().'/create/'], ['class' => 'btn btn-success']); ?>
         </div>
     </div>
     <div class="col-md-12">

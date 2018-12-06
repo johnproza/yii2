@@ -16,9 +16,16 @@ use yii\data\ArrayDataProvider;
 
 class ItemsController extends Controller
 {
-    public function actionIndex()
+    public function actionIndex($cat=null)
     {
-        $query = MenuItems::find()->joinWith('menu')->asArray()->all();
+        //var_dump($cat);
+        $allCat = Menu::find()->asArray()->all();
+        if(is_null($cat) || empty($cat)){
+            $query = MenuItems::find()->joinWith('menu')->asArray()->all();
+        }else{
+            $query = MenuItems::find()->joinWith('menu')->where(["menu_items.menu_id"=>$cat])->asArray()->all();
+        }
+
         $provider = new ArrayDataProvider([
 
             'allModels'=>$query,
@@ -33,12 +40,11 @@ class ItemsController extends Controller
 
         return $this->render('index',[
             'items'=>$provider->getModels(),
-            'pages'=>$provider->pagination]);
+            'pages'=>$provider->pagination,
+            'cats'=>$allCat,
+            'catId'=>$cat]);
     }
 
-    public static function Menu($id){
-        return MenuItems::find()->joinWith('seo')->joinWith('menu')->where(['menu_items.status'=>1,'menu.id'=>$id , 'menu.status'=>1])->asArray()->all();
-    }
 
 
 
@@ -54,7 +60,7 @@ class ItemsController extends Controller
             if($seo->save()){
                 $item->seo_id = $seo->id;
                 $item->save();
-                return $this->redirect(Yii::$app->request->referrer ?: Yii::$app->homeUrl);
+                return $this->redirect(Yii::$app->request->referrer ? Yii::$app->request->referrer : Yii::$app->homeUrl);
             }
         }
 
@@ -74,7 +80,7 @@ class ItemsController extends Controller
             $item['seo']->load(Yii::$app->request->post())) {
 
             if ($item->save() && $item['seo']->save()){
-                return $this->redirect(Yii::$app->request->referrer ?: Yii::$app->homeUrl);
+                return $this->goBack((!empty(Yii::$app->request->referrer) ? Yii::$app->request->referrer : null));
             }
         }
 
@@ -116,34 +122,24 @@ class ItemsController extends Controller
         }
     }
 
-    public function actionRemove($json=null)
+    public function actionRemove($id=null)
     {
-
-
-        if(Yii::$app->request->isAjax){
-            $cat = Menu::findOne(Yii::$app->request->post(id));
-            if ($cat->delete()) { //
-                return $this->asJson([
-                    'status' => true,
-                ]);
+        if(Yii::$app->request->isPost){
+            $cat = MenuItems::findOne($id);
+            if ($cat->delete()) {
+                return $this->redirect(Yii::$app->request->referrer);
             }
-            else {
-                return $this->asJson([
-                    'status' => false,
-                ]);
-            }
-
-
-
-
-        }
-        else {
-            return $this->asJson(['status'=>'Access denied']);
         }
     }
 
+    public static function Menu($id){
+        return MenuItems::find()->joinWith('seo')->joinWith('menu')->where(['menu_items.status'=>1,'menu.id'=>$id , 'menu.status'=>1])->asArray()->all();
+    }
+
+
     protected function getByUrl($url){
-        return Seo::find()->where(['seo.url'=>$url, 'menu_items.status'=>1])->joinWith('items')->asArray()->limit(1)->one();
+
+        return Seo::find()->joinWith('items')->where(['seo.url'=>$url, 'menu_items.status'=>1])->asArray()->limit(1)->one();
     }
 }
 

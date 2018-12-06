@@ -6,7 +6,8 @@
  * Time: 1:08
  */
 use yii\helpers\ArrayHelper;
-
+use oboom\menu\BackAssetsBundle;
+BackAssetsBundle::register($this);
 ?>
 <div class="tabContent">
     <?php

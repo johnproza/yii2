@@ -12,8 +12,7 @@ use yii\helpers\Url;
 
 
 $this->title = 'Login';
-use oboom\menu\BackAssetsBundle;
-BackAssetsBundle::register($this);
+
 //$this->registerJsFile('@oboom/menu/assets/js/froala_editor.min.js', ['position' => \yii\web\View::POS_END]);
 ?>
 <div class="mainSection category">

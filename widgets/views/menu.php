@@ -18,10 +18,10 @@ FrontAssetsBundle::register($this);
        <li>
            <a href="<?
                     if(!empty($item['redirect']) && !is_null($item['redirect'])) {
-                        echo Url::toRoute([$item['redirect']]);
+                        echo Url::toRoute($item['redirect']);
                     }
                     else {
-                        echo Url::toRoute([$item['seo']['url']]);
+                        echo Url::toRoute('/'.$item['seo']['url']);
                     }
                       ;?>"><?=$item['label'];?></a>
        </li>

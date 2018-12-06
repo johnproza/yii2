@@ -38,7 +38,8 @@ class MenuItems extends ActiveRecord
             [['status', 'parent', 'seo_id', 'menu_id'], 'integer'],
             [['label'], 'string', 'max' => 45],
             [['redirect'], 'string', 'max' => 90],
-            [['title','content'], 'string', 'max' => 45],
+            [['content'],'string'],
+            [['title'], 'string', 'max' => 45],
             [['menu_id'], 'exist', 'skipOnError' => true, 'targetClass' => Menu::className(), 'targetAttribute' => ['menu_id' => 'id']],
             [['seo_id'], 'exist', 'skipOnError' => true, 'targetClass' => Seo::className(), 'targetAttribute' => ['seo_id' => 'id']],
         ];
