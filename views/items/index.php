@@ -31,11 +31,11 @@ $this->title = "Пункты меню";
             <table class="table ">
                 <thead>
                 <tr>
-                    <th>#</th>
+                    <th class="w-f50">#</th>
                     <th>Название</th>
-                    <th>Категория</th>
-                    <th class="center">Статус</th>
-                    <th></th>
+                    <th class="w-f150">Категория</th>
+                    <th class="center w-f50">Статус</th>
+                    <th class="w-f150"></th>
                 </tr>
                 </thead>
                 <tbody>
@@ -84,8 +84,8 @@ $this->title = "Пункты меню";
                             <?endif;?>
                         </td>
                         <td class="center">
-                            <?= Html::a("<i>Обновить</i>", '/menu/items/update/'.$item['id']) ?>
-                            <?= Html::a("<i>Удалить</i>", '/menu/items/remove/'.$item['id'],
+                            <?= Html::a('<i class="icon ion-md-create iconBase"></i>', '/menu/items/update/'.$item['id']) ?>
+                            <?= Html::a('<i class="icon ion-md-close-circle-outline iconBase"></i>', '/menu/items/remove/'.$item['id'],
                                 ['data-confirm' => 'Хотите удалить запись?',
                                     'data-method' => 'post',
                                     'data-pjax' => '0',]

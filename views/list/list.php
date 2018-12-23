@@ -21,10 +21,10 @@ $this->title = "Группы меню";
         <table class="table ">
             <thead>
             <tr>
-                <th>#</th>
+                <th class="w-f50">#</th>
                 <th>Название</th>
-                <th class="center">Статус</th>
-                <th></th>
+                <th class="center w-f50">Статус</th>
+                <th class="w-f150"></th>
             </tr>
             </thead>
             <tbody>
@@ -56,8 +56,8 @@ $this->title = "Группы меню";
                     <!--                        --><?//=\Yii::$app->formatter->asDate($item->created_at, 'hh:mm:ss')?>
                     <!--                    </td>-->
                     <td class="center">
-                        <?= Html::a("<i>Обновить</i>", [Url::to().'/update/'.$item['id']]) ?>
-                        <?= Html::a("<i>Удалить</i>", [Url::to().'/remove/'.$item['id']],
+                        <?= Html::a('<i class="icon ion-md-create iconBase"></i>', [Url::to().'/update/'.$item['id']]) ?>
+                        <?= Html::a('<i class="icon ion-md-close-circle-outline iconBase"></i>', [Url::to().'/remove/'.$item['id']],
                             ['data-confirm' => 'Хотите удалить запись?',
                                 'data-method' => 'post',
                                 'data-status' => '0',]
