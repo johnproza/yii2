@@ -5,14 +5,12 @@
  * Date: 10.11.2018
  * Time: 0:21
  */
-use yii\bootstrap\ActiveForm;
-use yii\bootstrap\Tabs;
+use yii\bootstrap4\ActiveForm;
+use yii\bootstrap4\Tabs;
 use yii\helpers\Html;
 use yii\helpers\Url;
-
-$this->title = 'Login';
+$this->title = 'Обновление материала';
 use oboom\menu\BackAssetsBundle;
-
 BackAssetsBundle::register($this);
 ?>
 <div class="mainSection category">

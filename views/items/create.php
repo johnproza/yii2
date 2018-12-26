@@ -5,15 +5,12 @@
  * Date: 10.11.2018
  * Time: 0:21
  */
-use yii\bootstrap\ActiveForm;
-use yii\bootstrap\Tabs;
+use yii\bootstrap4\ActiveForm;
+use yii\bootstrap4\Tabs;
 use yii\helpers\Html;
 use yii\helpers\Url;
+$this->title = 'Создание материала';
 
-
-$this->title = 'Login';
-
-//$this->registerJsFile('@oboom/menu/assets/js/froala_editor.min.js', ['position' => \yii\web\View::POS_END]);
 ?>
 <div class="mainSection category">
     <?php $form = ActiveForm::begin(['id' => 'create-category',

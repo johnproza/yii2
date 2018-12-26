@@ -23,6 +23,7 @@ class m181113_120305_menu_items extends Migration
               `parent` INT NOT NULL DEFAULT 0,
               `seo_id` INT NULL,
               `menu_id` INT NULL,
+              `sort` SMALLINT NOT NULL DEFAULT 0,
               PRIMARY KEY (`id`),
               INDEX `SEO` (`seo_id` ASC),
               INDEX `MENU` (`menu_id` ASC),

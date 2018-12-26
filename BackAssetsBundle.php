@@ -20,6 +20,7 @@ class BackAssetsBundle extends AssetBundle
     public $js = [
         'js/tinymce.min.js',
         'js/themes/modern/theme.min.js',
+        'js/jquery-sortable.js',
         'js/script.js'
     ];
 

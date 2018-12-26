@@ -8,6 +8,7 @@
 
 namespace oboom\menu\controllers;
 use Yii;
+use yii\helpers\Json;
 use yii\web\Controller;
 use oboom\menu\models\Seo;
 use oboom\menu\models\Menu;
@@ -33,7 +34,12 @@ class ItemsController extends Controller
                 'pageSize' => 20,
             ],
             'sort' => [
-                'attributes' => ['id'],
+                'attributes' => [
+                    'id',
+                    'sort',
+                ],
+
+                'defaultOrder' => [ 'sort'=> SORT_ASC]
             ],
         ]);
 
@@ -90,9 +96,19 @@ class ItemsController extends Controller
 
     }
 
+    public function actionRemove($id=null)
+    {
+        if(Yii::$app->request->isPost){
+            $cat = MenuItems::findOne($id);
+            if ($cat->delete()) {
+                return $this->redirect(Yii::$app->request->referrer);
+            }
+        }
+    }
+
+    //ajax update status of publication
     public function actionStatus($json=null)
     {
-
 
         if(Yii::$app->request->isAjax){
             $cat = Menu::findOne(Yii::$app->request->post(id));
@@ -112,30 +128,39 @@ class ItemsController extends Controller
                     'status' => false,
                 ]);
             }
-
-
-
-
         }
         else {
             return $this->asJson(['status'=>'Access denied']);
         }
     }
 
-    public function actionRemove($id=null)
+    //ajax update sort
+    public function actionSort($json=null)
     {
-        if(Yii::$app->request->isPost){
-            $cat = MenuItems::findOne($id);
-            if ($cat->delete()) {
-                return $this->redirect(Yii::$app->request->referrer);
+        if(Yii::$app->request->isAjax){
+
+            $json = Json::decode($json);
+            //return Json::encode($json[0]);
+            $i=-1;
+            foreach ($json[0] as $data){
+                ++$i;
+                $item = MenuItems::findOne($data['id']);
+                $item->sort = $i;
+                $item->save();
             }
+
+            return $this->asJson([
+                'status' => Json::encode($json[0]),
+            ]);
+        }
+        else {
+            return $this->asJson(['status'=>'Access denied']);
         }
     }
 
     public static function Menu($id){
-        return MenuItems::find()->joinWith('seo')->joinWith('menu')->where(['menu_items.status'=>1,'menu.id'=>$id , 'menu.status'=>1])->asArray()->all();
+        return MenuItems::find()->joinWith('seo')->joinWith('menu')->where(['menu_items.status'=>1,'menu.id'=>$id , 'menu.status'=>1])->orderBy(['menu_items.sort'=>SORT_ASC])->asArray()->all();
     }
-
 
     protected function getByUrl($url){
 

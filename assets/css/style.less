@@ -1,3 +1,39 @@
+body.dragging, body.dragging * {
+  cursor: move !important;
+}
+
+.dragged {
+  position: absolute;
+  opacity: 0.5;
+  z-index: 2000;
+}
+
+tbody.drag tr {
+  position: relative;
+  &.placeholder {
+    position: relative;
+  }
+
+  td {
+    span {
+      cursor: move;
+    }
+  }
+
+}
+
+
+
+tbody.drag tr.placeholder:before {
+  content: '';
+  position: absolute;
+  margin: -5px 0 0 -10px;
+  border-top: 5px solid transparent;
+  border-left: 10px solid red;
+  border-bottom: 5px solid transparent;
+
+}
+
 .nav {
   &.horizontal-menu{
     ul {
@@ -42,4 +78,22 @@
       }
     }
   }
+}
+
+.systemBar {
+  .buttons {
+    a {
+      &.sort {
+        background: red;
+      }
+    }
+  }
+}
+
+#message {
+  margin-top:20px;
+}
+
+.hide {
+  display: none;
 }

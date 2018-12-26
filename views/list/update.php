@@ -10,13 +10,11 @@ use yii\bootstrap\Tabs;
 use yii\helpers\Html;
 use yii\helpers\Url;
 
-$this->title = 'Login';
+$this->title = 'Обновление группы меню';
 ?>
 <div class="mainSection category">
     <?php $form = ActiveForm::begin(['id' => 'create-category',
         'options' => ['class' => 'form']]); ?>
-
-
     <?php echo Tabs::widget([
         'items' => [
             [
