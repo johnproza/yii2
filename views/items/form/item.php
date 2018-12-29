@@ -9,7 +9,7 @@ use yii\helpers\ArrayHelper;
 use oboom\menu\BackAssetsBundle;
 BackAssetsBundle::register($this);
 ?>
-<div class="tabContent">
+<div class="tabContent row">
     <?php
         $arrayParent = [
             'Основная' => [

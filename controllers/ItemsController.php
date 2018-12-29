@@ -19,7 +19,7 @@ class ItemsController extends Controller
 {
     public function actionIndex($cat=null)
     {
-        //var_dump($cat);
+
         $allCat = Menu::find()->asArray()->all();
         if(is_null($cat) || empty($cat)){
             $query = MenuItems::find()->joinWith('menu')->asArray()->all();
@@ -164,7 +164,7 @@ class ItemsController extends Controller
 
     protected function getByUrl($url){
 
-        return Seo::find()->joinWith('items')->where(['seo.url'=>$url, 'menu_items.status'=>1])->asArray()->limit(1)->one();
+        return Seo::find()->joinWith('items')->where(['seo.url'=>$url, 'menu_items.status'=>1])->limit(1)->one();
     }
 }
 
