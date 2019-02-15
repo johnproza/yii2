@@ -12,6 +12,7 @@ window.onload = function () {
 
     let filter = $('#menuFilter');
     let drag = $('.drag');
+    var oldContainer;
 
     if(filter.length!=0){
         filter.change(function () {
@@ -19,20 +20,34 @@ window.onload = function () {
         })
     }
 
+
+
     if(drag.length!=0){
         drag.sortable({
-            group: 'drag',
-            flag : false,
-            containerSelector : 'tbody',
-            itemSelector : 'tr',
-            placeholder : '<tr class="placeholder"></tr>',
-            handle: '',
+            //group: 'drag',
+            //flag : true,
+            //containerSelector : 'ul',
+            itemSelector : 'li',
+            placeholder : '<li class="placeholder"></li>',
+            distance: 1,
+
+            afterMove: function (placeholder, container) {
+                if(oldContainer != container){
+                    if(oldContainer)
+                        oldContainer.el.removeClass("active");
+                    container.el.addClass("active");
+
+                    oldContainer = container;
+                }
+            },
+
             onDrop: function ($item, container, _super) {
                 if(!this.flag){
                     let sendButton = $('<span id="sendSort"></span>').text('Сохранить порядок').addClass('btn btn-danger');
                     sendButton.click(sendData)
                     $('.buttons:eq(0)').append(sendButton);
                 }
+                container.el.removeClass("active");
 
                 _super($item, container);
                 this.flag = true;
@@ -45,6 +60,7 @@ window.onload = function () {
                             json : JSON.stringify(drag.sortable("serialize").get(), null, ' ')
                         },
                         success : function (data) {
+                            //console.log(data)
                             if(data.status) {
                                 $("#message").removeClass('hide').text('Порядок сохранен');
                                 setTimeout(function () {

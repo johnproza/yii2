@@ -12,7 +12,7 @@ use yii\helpers\Url;
 $this->title = 'Создание материала';
 
 ?>
-<div class="mainSection category">
+<div class="mainSection">
     <?php $form = ActiveForm::begin(['id' => 'create-category',
         'options' => ['class' => 'form']]); ?>
 

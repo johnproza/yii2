@@ -10,10 +10,8 @@ use yii\bootstrap4\Tabs;
 use yii\helpers\Html;
 use yii\helpers\Url;
 $this->title = 'Обновление материала';
-use oboom\menu\BackAssetsBundle;
-BackAssetsBundle::register($this);
 ?>
-<div class="mainSection category">
+<div class="mainSection">
     <?php $form = ActiveForm::begin(['id' => 'create-category',
         'options' => ['class' => 'form']]); ?>
 

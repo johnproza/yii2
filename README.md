@@ -29,5 +29,21 @@ Use it in your code:
 
 ```php
 'menu' => [
-            'class' => 'oboom\menu\Module',
-        ]
+    'class' => 'oboom\menu\Module',
+]
+```
+
+Widget usage
+------------
+
+Insert into your view file for upload images
+```php
+use oboom\menu\widgets\Menu;
+.....
+.....
+<?=Menu::widget([
+    'menuId'=>1, // menu id
+    'level'=>1, //menu level
+    'className'=>'header' // css class name
+]) ?>
+```

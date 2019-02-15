@@ -22,31 +22,20 @@ class ItemsController extends Controller
 
         $allCat = Menu::find()->asArray()->all();
         if(is_null($cat) || empty($cat)){
-            $query = MenuItems::find()->joinWith('menu')->asArray()->all();
+            //$query = MenuItems::find()->joinWith('menu')->asArray()->all();
         }else{
-            $query = MenuItems::find()->joinWith('menu')->where(["menu_items.menu_id"=>$cat])->asArray()->all();
+            $data = [];
+            $query = MenuItems::find()->joinWith('menu')->where(["menu_items.menu_id"=>$cat,'menu_items.parent'=>0])->orderBy('menu_items.sort')->all();
+            foreach ($query as $item){
+                $data[]=['parent'=>$item, 'child'=>MenuItems::find()->select('id, label, status, sort, parent')->where(['parent'=>$item->id])->orderBy('sort')->all()];
+            }
         }
 
-        $provider = new ArrayDataProvider([
-
-            'allModels'=>$query,
-            'pagination' => [
-                'pageSize' => 20,
-            ],
-            'sort' => [
-                'attributes' => [
-                    'id',
-                    'sort',
-                ],
-
-                'defaultOrder' => [ 'sort'=> SORT_ASC]
-            ],
-        ]);
 
 
         return $this->render('index',[
-            'items'=>$provider->getModels(),
-            'pages'=>$provider->pagination,
+            'items'=>$data,
+
             'cats'=>$allCat,
             'catId'=>$cat]);
     }
@@ -144,22 +133,52 @@ class ItemsController extends Controller
             $i=-1;
             foreach ($json[0] as $data){
                 ++$i;
-                $item = MenuItems::findOne($data['id']);
-                $item->sort = $i;
-                $item->save();
+                $parent = MenuItems::findOne($data['id']);
+                $parent->sort = $i;
+                $parent->parent = 0;
+                $parent->save();
+
+
+
+                if(count($data['children'][0])>0){
+                    $j=-1;
+                    foreach ($data['children'][0] as $child){
+                        ++$j;
+                        $childItem = MenuItems::findOne($child['id']);
+                        if(!is_null($childItem)) {
+                            $childItem->sort = $j;
+                            $childItem->parent=$parent->id;
+                            $childItem->save();
+
+                        }
+
+                    }
+
+                }
             }
 
-            return $this->asJson([
-                'status' => Json::encode($json[0]),
-            ]);
+            return $this->asJson(['status'=>true]);
         }
         else {
             return $this->asJson(['status'=>'Access denied']);
         }
     }
 
-    public static function Menu($id){
-        return MenuItems::find()->joinWith('seo')->joinWith('menu')->where(['menu_items.status'=>1,'menu.id'=>$id , 'menu.status'=>1])->orderBy(['menu_items.sort'=>SORT_ASC])->asArray()->all();
+    public static function Menu($id,$level=1){
+        if($level==2){
+            $data = [];
+            $query = MenuItems::find()->joinWith('menu')->joinWith('seo')->where(["menu_items.menu_id"=>$id,'menu_items.parent'=>0,'menu.status'=>1])->orderBy('menu_items.sort')->all();
+            foreach ($query as $item){
+                $data[]=['parent'=>$item, 'child'=>MenuItems::find()->joinWith('seo')->joinWith('menu')
+                        ->where(['menu_items.parent'=>$item->id,'menu_items.status'=>1])
+                        ->orderBy('sort')->asArray()->all()];
+            }
+
+            return $data;
+        }
+        return MenuItems::find()->joinWith('seo')->joinWith('menu')
+                                ->where(['menu_items.status'=>1,'menu.id'=>$id , 'menu.status'=>1, 'menu_items.parent'=>0])
+                                ->orderBy(['menu_items.sort'=>SORT_ASC])->asArray()->all();
     }
 
     protected function getByUrl($url){

@@ -22,6 +22,7 @@ class Menu extends Widget
      */
     public $template = "menu";
     public $data;
+    public $level=1;
     public $className;
     public $type="horizontal-menu";
     public $menuId;
@@ -29,7 +30,7 @@ class Menu extends Widget
     public function init(){
         parent::init();
         if ($this->data===null && $this->menuId!==null){
-            $this->data =ItemsController::Menu($this->menuId);
+            $this->data =ItemsController::Menu($this->menuId,$this->level);
         }
         else {
             throw new \ErrorException('menuId is required attribute');
@@ -40,6 +41,7 @@ class Menu extends Widget
         if ($this->menuId!='' && $this->menuId!==null){
             return $this->render($this->template,
                     ['type'=>$this->type,
+                     'level'=>$this->level,
                      'className'=>$this->className?' '.$this->className:'',
                      'data'=>$this->data]);
         }

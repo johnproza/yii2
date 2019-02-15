@@ -8,11 +8,11 @@
 use yii\helpers\ArrayHelper;
 
 ?>
-<div class="tabContent">
-    <div class="col-lg-12 col-md-12">
+<div class="row">
+    <div class="col-md-12">
         <?= $form->field($item, 'name')->textInput(['autofocus' => true,'placeholder'=>'Название'])->label(false) ?>
     </div>
-    <div class="col-lg-12 col-md-12">
+    <div class="col-md-12">
         <?= $form->field($item, 'status')->radioList([1 => 'Опубликовано',
             0 => 'Не опубликовано'])
             ->label('Статус')?>

@@ -16,6 +16,7 @@ class m181113_120221_menu extends Migration
             CREATE TABLE IF NOT EXISTS `menu` (
               `id` INT NOT NULL AUTO_INCREMENT,
               `name` VARCHAR(45) NOT NULL,
+              `position` VARCHAR(45) NULL,
               `status` SMALLINT(6) NULL,
               PRIMARY KEY (`id`))
             ENGINE = InnoDB

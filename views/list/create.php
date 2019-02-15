@@ -12,7 +12,7 @@ use yii\helpers\Url;
 
 $this->title = 'Создание меню';
 ?>
-<div class="mainSection category">
+<div class="mainSection">
     <?php $form = ActiveForm::begin(['id' => 'create-category',
         'options' => ['class' => 'form']]); ?>
     <?php echo Tabs::widget([

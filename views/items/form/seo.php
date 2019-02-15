@@ -8,7 +8,7 @@
 use yii\helpers\ArrayHelper;
 
 ?>
-<div class="tabContent row">
+<div class="row">
     <div class="col-lg-12 col-md-12">
         <?= $form->field($seo, 'title')->textInput(['autofocus' => true,'placeholder'=>'Заголовок'])->label(false) ?>
     </div>

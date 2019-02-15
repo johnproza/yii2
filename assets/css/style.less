@@ -31,8 +31,146 @@ tbody.drag tr.placeholder:before {
   border-top: 5px solid transparent;
   border-left: 10px solid red;
   border-bottom: 5px solid transparent;
-
 }
+
+ul.drag li.placeholder {
+  position: relative;
+  background: #ccc;
+  padding: 10px 0px;
+  /** More li styles **/
+}
+ul.drag li.placeholder:before {
+  position: absolute;
+  content: '';
+  left: -5px;
+  position: absolute;
+  margin: -5px 0 0 -10px;
+  border-top: 5px solid transparent;
+  border-left: 10px solid red;
+  border-bottom: 5px solid transparent;
+}
+
+.drag {
+  list-style: none;
+  padding: 0px;
+  margin: 25px 0 0 0px;
+
+  &.active {
+    border: 5px solid red;
+  }
+
+  div.item{
+    display: flex;
+    border: 1px solid #ccc;
+    >div {
+      border-left: 1px solid #ccc;
+      padding: 10px;
+      &:first-child{
+        border-left: 0px;
+      }
+    }
+    .id, .arrow {
+      flex: 0 0 30px;
+    }
+
+    .title {
+      flex: 0 0 400px;
+      span {
+        margin-right: 10px;
+        display: inline-block;
+      }
+    }
+
+    .menu-cat {
+      flex: 1 0;
+    }
+
+    .status-item {
+      flex: 0 0 150px;
+      text-align: center;
+    }
+
+    .action-item {
+      flex: 0 0 100px;
+
+      text-align: center;
+    }
+
+
+  }
+
+  >li {
+    >div.item {
+      .title {
+        flex: 0 0 460px;
+        //background: red;
+      }
+      //padding-left: 40px;
+    }
+    >ol {
+      &.active {
+        border: 3px solid red;
+      }
+
+      list-style: none;
+      margin: 0px;
+      padding: 0px;
+      margin-left: 40px;
+
+      >li {
+        >ul{
+
+          &.active {
+            border: 3px solid red;
+          }
+
+          list-style: none;
+          padding: 0px;
+          margin: 0px;
+          >li{
+            >div.item {
+              .title {
+                padding-left: 80px;
+              }
+
+            }
+          }
+        }
+        >div.item {
+          .title {
+            flex: 0 0 420px;
+          }
+
+        }
+      }
+    }
+  }
+
+
+  //li {
+  //  //border-bottom:1px solid #dee2e6;
+  //  div{
+  //
+  //    border-left: 1px solid #ccc;
+  //    padding: 10px;
+  //  }
+  //
+  //
+  //
+  //
+  //    li{
+  //      list-style: none;
+  //
+  //      div{
+  //        display: inline-block;
+  //        width: 100%;
+  //        padding: 10px;
+  //        border: 1px solid #ccc;
+  //      }
+  //    }
+  //  }
+}
+
 
 .nav {
   &.horizontal-menu{
@@ -97,3 +235,4 @@ tbody.drag tr.placeholder:before {
 .hide {
   display: none;
 }
+

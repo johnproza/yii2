@@ -24,6 +24,88 @@ tbody.drag tr.placeholder:before {
   border-left: 10px solid red;
   border-bottom: 5px solid transparent;
 }
+ul.drag li.placeholder {
+  position: relative;
+  background: #ccc;
+  padding: 10px 0px;
+  /** More li styles **/
+}
+ul.drag li.placeholder:before {
+  content: '';
+  left: -5px;
+  position: absolute;
+  margin: -5px 0 0 -10px;
+  border-top: 5px solid transparent;
+  border-left: 10px solid red;
+  border-bottom: 5px solid transparent;
+}
+.drag {
+  list-style: none;
+  padding: 0px;
+  margin: 25px 0 0 0px;
+}
+.drag.active {
+  border: 5px solid red;
+}
+.drag div.item {
+  display: flex;
+  border: 1px solid #ccc;
+}
+.drag div.item > div {
+  border-left: 1px solid #ccc;
+  padding: 10px;
+}
+.drag div.item > div:first-child {
+  border-left: 0px;
+}
+.drag div.item .id,
+.drag div.item .arrow {
+  flex: 0 0 30px;
+}
+.drag div.item .title {
+  flex: 0 0 400px;
+}
+.drag div.item .title span {
+  margin-right: 10px;
+  display: inline-block;
+}
+.drag div.item .menu-cat {
+  flex: 1 0;
+}
+.drag div.item .status-item {
+  flex: 0 0 150px;
+  text-align: center;
+}
+.drag div.item .action-item {
+  flex: 0 0 100px;
+  text-align: center;
+}
+.drag > li > div.item .title {
+  flex: 0 0 460px;
+}
+.drag > li > ol {
+  list-style: none;
+  margin: 0px;
+  padding: 0px;
+  margin-left: 40px;
+}
+.drag > li > ol.active {
+  border: 3px solid red;
+}
+.drag > li > ol > li > ul {
+  list-style: none;
+  padding: 0px;
+  margin: 0px;
+}
+.drag > li > ol > li > ul.active {
+  border: 3px solid red;
+}
+.drag > li > ol > li > ul > li > div.item .title {
+  padding-left: 80px;
+}
+.drag > li > ol > li > div.item .title {
+  flex: 0 0 420px;
+}
 .nav.horizontal-menu ul {
   list-style: none;
   display: inline-block;
