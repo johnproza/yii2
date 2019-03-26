@@ -21,6 +21,13 @@ or add
 
 to the require section of your `composer.json` file.
 
+Usage
+-----
+
+Before using you must prepare database
+```php
+php yii migrate --migrationPath=@vendor/johnproza/yii2-menu/migrations 
+```
 
 Config extension
 -----
@@ -43,6 +50,7 @@ use oboom\menu\widgets\Menu;
 .....
 <?=Menu::widget([
     'menuId'=>1, // menu id
+    'itemId'=>$item->id, // id of item. This is check, how to assign menu into item 
     'level'=>1, //menu level
     'className'=>'header' // css class name
 ]) ?>

@@ -19,6 +19,7 @@ class ItemsController extends Controller
 {
     public function actionIndex($cat=null)
     {
+        \yii\helpers\Url::remember();
 
         $allCat = Menu::find()->asArray()->all();
         if(is_null($cat) || empty($cat)){
@@ -52,10 +53,11 @@ class ItemsController extends Controller
         $parent = MenuItems::find()->where(['=','parent',0])->all();
 
         if ($item->load(Yii::$app->request->post()) && $seo->load(Yii::$app->request->post())) {
+
             if($seo->save()){
                 $item->seo_id = $seo->id;
                 $item->save();
-                return $this->redirect(Yii::$app->request->referrer ? Yii::$app->request->referrer : Yii::$app->homeUrl);
+                return $this->goBack();
             }
         }
 
@@ -66,7 +68,7 @@ class ItemsController extends Controller
 
     public function actionUpdate($id=null)
     {
-
+        //var_dump(Yii::$app->request->referrer);
         $item = MenuItems::find()->where(['=','menu_items.id',$id])->joinWith('seo')->limit(1)->one();
         $menu = Menu::find()->all();
         $parent = MenuItems::find()->where(['=','parent',0])->all();
@@ -75,7 +77,8 @@ class ItemsController extends Controller
             $item['seo']->load(Yii::$app->request->post())) {
 
             if ($item->save() && $item['seo']->save()){
-                return $this->goBack((!empty(Yii::$app->request->referrer) ? Yii::$app->request->referrer : null));
+                return $this->goBack();
+                //return $this->redirect(Yii::$app->request->referrer ? Yii::$app->request->referrer : Yii::$app->homeUrl);
             }
         }
 
@@ -164,10 +167,11 @@ class ItemsController extends Controller
         }
     }
 
-    public static function Menu($id,$level=1){
+    public static function Menu($menu_id,$level=1){
+
         if($level==2){
             $data = [];
-            $query = MenuItems::find()->joinWith('menu')->joinWith('seo')->where(["menu_items.menu_id"=>$id,'menu_items.parent'=>0,'menu.status'=>1])->orderBy('menu_items.sort')->all();
+            $query = MenuItems::find()->joinWith('menu')->joinWith('seo')->where(["menu_items.menu_id"=>$menu_id,'menu_items.parent'=>0,'menu.status'=>1])->orderBy('menu_items.sort')->all();
             foreach ($query as $item){
                 $data[]=['parent'=>$item, 'child'=>MenuItems::find()->joinWith('seo')->joinWith('menu')
                         ->where(['menu_items.parent'=>$item->id,'menu_items.status'=>1])
@@ -177,12 +181,12 @@ class ItemsController extends Controller
             return $data;
         }
         return MenuItems::find()->joinWith('seo')->joinWith('menu')
-                                ->where(['menu_items.status'=>1,'menu.id'=>$id , 'menu.status'=>1, 'menu_items.parent'=>0])
+                                ->where(['menu_items.status'=>1,'menu.id'=>$menu_id , 'menu.status'=>1, 'menu_items.parent'=>0])
                                 ->orderBy(['menu_items.sort'=>SORT_ASC])->asArray()->all();
+        if(!is_null($item_id)){}
     }
 
     protected function getByUrl($url){
-
         return Seo::find()->joinWith('items')->where(['seo.url'=>$url, 'menu_items.status'=>1])->limit(1)->one();
     }
 }

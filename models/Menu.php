@@ -17,9 +17,9 @@ use \yii\db\ActiveRecord;
  */
 class Menu extends ActiveRecord
 {
-    /**
-     * {@inheritdoc}
-     */
+
+    public $assign=null;
+
     public static function tableName()
     {
         return 'menu';
@@ -32,7 +32,8 @@ class Menu extends ActiveRecord
     {
         return [
             [['name'], 'required'],
-            [['status'], 'integer'],
+            [['status','static'], 'integer'],
+            [['assign'], 'safe'],
             [['name', 'position'], 'string', 'max' => 45],
         ];
     }
@@ -56,5 +57,10 @@ class Menu extends ActiveRecord
     public function getMenuItems()
     {
         return $this->hasMany(MenuItems::className(), ['menu_id' => 'id']);
+    }
+
+    public function getMenuAssign()
+    {
+        return $this->hasMany(MenuAssign::className(), ['menu_id' => 'id']);
     }
 }

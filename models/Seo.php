@@ -52,6 +52,17 @@ class Seo extends \yii\db\ActiveRecord
         ];
     }
 
+
+    public function beforeSave($insert){
+        if (parent::beforeSave($insert)) {
+            if(!$insert && empty($this->url)){
+                $this->url = Yii::$app->controller->module->id.$this->id;
+            }
+            return true;
+        }
+        return false;
+    }
+
     /**
      * @return \yii\db\ActiveQuery
      */

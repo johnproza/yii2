@@ -17,7 +17,8 @@ class m181113_120221_menu extends Migration
               `id` INT NOT NULL AUTO_INCREMENT,
               `name` VARCHAR(45) NOT NULL,
               `position` VARCHAR(45) NULL,
-              `status` SMALLINT(6) NULL,
+              `status` SMALLINT(1) NULL,
+              `static` SMALLINT(1) NULL,
               PRIMARY KEY (`id`))
             ENGINE = InnoDB
         ");

@@ -151,4 +151,10 @@ ul.drag li.placeholder:before {
 .hide {
   display: none;
 }
+.assign h3 {
+  font-style: 20px;
+}
+.assign label {
+  font-weight: normal;
+}
 /*# sourceMappingURL=style.css.map */

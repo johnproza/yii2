@@ -19,7 +19,7 @@ $this->title = 'Создание меню';
         'items' => [
             [
                 'label' => 'Описание',
-                'content' =>  $this->render('form/item', ['item' => $item, 'form'=> $form]),
+                'content' =>  $this->render('form/item', ['item' => $item, 'form'=> $form,'list'=>$list]),
                 'active' => true
             ],
         ],

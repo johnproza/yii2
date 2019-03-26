@@ -8,6 +8,8 @@
 
 namespace oboom\menu\widgets;
 use oboom\menu\controllers\ItemsController;
+use oboom\menu\models\MenuAssign;
+use oboom\menu\models\MenuItems;
 use yii\base\Widget;
 use yii\helpers\Html;
 
@@ -26,25 +28,41 @@ class Menu extends Widget
     public $className;
     public $type="horizontal-menu";
     public $menuId;
+    public $itemId;
 
     public function init(){
         parent::init();
-        if ($this->data===null && $this->menuId!==null){
-            $this->data =ItemsController::Menu($this->menuId,$this->level);
+
+        if(!is_null($this->menuId)){
+            $item = \oboom\menu\models\Menu::findOne($this->menuId);
+
+            if($item->static==1){
+                $this->data =ItemsController::Menu($this->menuId,$this->level);
+            }
+
+            else {
+                $assign = MenuAssign::find()->where(["menu_id"=>$this->menuId,"menu_item_id"=>$this->itemId])->limit(1)->one();
+                if(!is_null($assign)){
+
+                    $this->data =ItemsController::Menu($this->menuId,$this->level);
+                }
+            }
         }
         else {
             throw new \ErrorException('menuId is required attribute');
         }
+
     }
 
     public function run(){
-        if ($this->menuId!='' && $this->menuId!==null){
+        if(!is_null($this->data)){
             return $this->render($this->template,
-                    ['type'=>$this->type,
-                     'level'=>$this->level,
-                     'className'=>$this->className?' '.$this->className:'',
-                     'data'=>$this->data]);
+                ['type'=>$this->type,
+                    'level'=>$this->level,
+                    'className'=>$this->className?' '.$this->className:'',
+                    'data'=>$this->data]);
         }
+
 
     }
 
