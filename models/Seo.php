@@ -54,9 +54,10 @@ class Seo extends \yii\db\ActiveRecord
 
 
     public function beforeSave($insert){
+
         if (parent::beforeSave($insert)) {
-            if(!$insert && empty($this->url)){
-                $this->url = Yii::$app->controller->module->id.$this->id;
+            if(empty($this->url)){
+                $this->url = Yii::$app->controller->module->id.Yii::$app->security->generateRandomString(4);
             }
             return true;
         }
