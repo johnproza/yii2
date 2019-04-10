@@ -20,7 +20,7 @@ BackAssetsBundle::register($this);
         ];
         $arrayMenu= [
             'Основная' => [
-                '0' => 'Не в меню',
+                //'0' => 'Не в меню',
                 'Вложенные меню' =>ArrayHelper::map($menu,'id','name')
             ]
 

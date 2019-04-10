@@ -171,7 +171,7 @@ class ItemsController extends Controller
 
         if($level==2){
             $data = [];
-            $query = MenuItems::find()->joinWith('menu')->joinWith('seo')->where(["menu_items.menu_id"=>$menu_id,'menu_items.parent'=>0,'menu.status'=>1])->orderBy('menu_items.sort')->all();
+            $query = MenuItems::find()->joinWith('menu')->joinWith('seo')->where(["menu_items.menu_id"=>$menu_id,'menu_items.parent'=>0,'menu_items.status'=>1])->orderBy('menu_items.sort')->all();
             foreach ($query as $item){
                 $data[]=['parent'=>$item, 'child'=>MenuItems::find()->joinWith('seo')->joinWith('menu')
                         ->where(['menu_items.parent'=>$item->id,'menu_items.status'=>1])
