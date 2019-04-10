@@ -52,18 +52,35 @@ class ItemsController extends Controller
         $menu = Menu::find()->all();
         $parent = MenuItems::find()->where(['=','parent',0])->all();
 
+        $transaction = Yii::$app->db->beginTransaction();
+
+
+
+
         if ($item->load(Yii::$app->request->post()) && $seo->load(Yii::$app->request->post())) {
 
-            if($seo->save()){
-                $item->seo_id = $seo->id;
-                $item->save();
-                return $this->goBack();
+            try {
+                if($seo->save()){
+                    $item->seo_id = $seo->id;
+                    if($item->save()){
+                        $transaction->commit();
+                        return $this->goBack();
+                    }
+                    $transaction->rollBack();
+                }
+
+                $transaction->rollBack();
+
+            }catch (Exception $e) {
+                $transaction->rollBack();
             }
+
+
         }
 
-        else{
-            return $this->render('create', ['item'=>$item,'seo'=>$seo, 'menu'=>$menu, 'parent'=>$parent]);
-        }
+
+        return $this->render('create', ['item'=>$item,'seo'=>$seo, 'menu'=>$menu, 'parent'=>$parent]);
+
     }
 
     public function actionUpdate($id=null)

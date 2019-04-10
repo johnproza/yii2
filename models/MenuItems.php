@@ -34,7 +34,7 @@ class MenuItems extends ActiveRecord
     public function rules()
     {
         return [
-            [['label', 'status','title'], 'required'],
+            [['label', 'status','title','menu_id','parent'], 'required'],
             [['status', 'parent', 'seo_id', 'menu_id'], 'integer'],
             [['label'], 'string', 'max' => 45],
             [['redirect'], 'string', 'max' => 90],
@@ -57,9 +57,9 @@ class MenuItems extends ActiveRecord
             'content' => 'Описание',
             'redirect' => 'Редирект',
             'status' => 'Статус',
-            'parent' => 'Родитель',
+            'parent' => 'Родительская категория',
             'seo_id' => 'Seo ID',
-            'menu_id' => 'Menu ID',
+            'menu_id' => 'Привязка к меню',
         ];
     }
 
