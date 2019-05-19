@@ -1,6 +1,8 @@
-Dynamic menu + content
+Dynamic menu + content 
 ============
-Dynamic menu
+Dynamic menu and html content with TinyMCE editor
+
+You also can assign menu to item (dynamic and static menu) 
 
 Installation
 ------------
@@ -43,7 +45,7 @@ Use it in your code:
 Widget usage
 ------------
 
-Insert into your view file for upload images
+Insert into your view file to show menu in frontend
 ```php
 use oboom\menu\widgets\Menu;
 .....
@@ -54,4 +56,12 @@ use oboom\menu\widgets\Menu;
     'level'=>1, //menu level
     'className'=>'header' // css class name
 ]) ?>
+```
+
+Insert into your view file to show categories in backend
+```php
+use oboom\menu\widgets\MenuList;
+.....
+.....
+<?=MenuList::widget()?>
 ```

@@ -152,9 +152,16 @@ ul.drag li.placeholder:before {
   display: none;
 }
 .assign h3 {
-  font-style: 20px;
+  font-size: 20px;
 }
-.assign label {
+.assign div {
+  margin-top: 15px;
+  margin-bottom: 15px;
+  display: flex;
+  flex-flow: wrap;
+}
+.assign div label {
   font-weight: normal;
+  flex: 1 0 20%;
 }
 /*# sourceMappingURL=style.css.map */

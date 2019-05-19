@@ -43,7 +43,6 @@ class Menu extends Widget
             else {
                 $assign = MenuAssign::find()->where(["menu_id"=>$this->menuId,"menu_item_id"=>$this->itemId])->limit(1)->one();
                 if(!is_null($assign)){
-
                     $this->data =ItemsController::Menu($this->menuId,$this->level);
                 }
             }
