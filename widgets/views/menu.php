@@ -5,7 +5,6 @@
  * Date: 15.11.2018
  * Time: 23:21
  */
-
 use yii\helpers\Url;
 use oboom\menu\FrontAssetsBundle;
 
@@ -15,7 +14,7 @@ FrontAssetsBundle::register($this);
     <nav class="nav <?=$type;?><?=$className;?>">
         <ul>
         <?foreach ($data as $item):?>
-           <li>
+           <li <?=strrpos($item['seo']['url'], Yii::$app->getRequest()->pathInfo)!==false ? 'class=active': null?>>
                <a href="<?
                         if(!empty($item['redirect']) && !is_null($item['redirect'])) {
                             echo Url::toRoute($item['redirect']);
@@ -33,7 +32,7 @@ FrontAssetsBundle::register($this);
     <nav class="nav <?=$type;?><?=$className;?>">
         <ul>
             <?foreach ($data as $item):?>
-                <li>
+                <li <?=strrpos($item['parent']['seo']['url'], Yii::$app->getRequest()->pathInfo)!==false ? 'class=active': null?>>
                     <a href="<?
                     if(!empty($item['parent']['redirect']) && !is_null($item['parent']['redirect'])) {
                         echo Url::toRoute($item['parent']['redirect']);
