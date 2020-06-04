@@ -177,6 +177,7 @@ class ListController extends Controller
     }
 
     private function updateCheckbox($data=null,$menuID=null){
+
         if(!is_null($data)){
             foreach ($data as $value){
 

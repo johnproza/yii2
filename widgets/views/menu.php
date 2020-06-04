@@ -48,7 +48,7 @@ FrontAssetsBundle::register($this);
                                 <li>
                                     <a href="<?
                                     if(!empty($child['redirect']) && !is_null($child['redirect'])) {
-                                        echo Url::toRoute($item['parent']['redirect']);
+                                        echo Url::toRoute($child['redirect']);
                                     }
                                     else {
                                         echo Url::toRoute('/'.$child['seo']['url']);
